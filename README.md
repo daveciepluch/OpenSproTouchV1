@@ -18,6 +18,8 @@ http://forum.arduino.cc/index.php?topic=375410.0
 Nextion Library:
 https://github.com/itead/ITEADLIB_Arduino_Nextion
 
+Various others whose posts/code have helped me to better understand the Nextion interface
+
 ## Features
 
 Current features include:
