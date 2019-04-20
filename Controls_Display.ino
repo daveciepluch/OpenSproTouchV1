@@ -10,6 +10,19 @@ void setupControls() {
   digitalWrite(PUMP, LOW);
 }
 
+void preinfControl() {
+  brewState = digitalRead(BREW);
+  if (brewState == 1) {
+    if (millis() - brewStarted >= PREINF_DELAY) {
+      digitalWrite(PUMP, HIGH);
+      brewState = 0;
+    }
+    else{
+      brewState = 1;
+    }
+  }
+}
+
 void bt0PopCallback(void *ptr)
 {
   uint32_t dual_state;
@@ -17,11 +30,13 @@ void bt0PopCallback(void *ptr)
   memset(buffer, 0, sizeof(buffer));
   bt0.getValue(&dual_state);
   if (dual_state) {
-    digitalWrite(PUMP, HIGH);
+    group1Timer.startTimer();
     digitalWrite(BREW, HIGH);
+    brewStarted = millis ();
   } else {
     digitalWrite(BREW, LOW);
     digitalWrite(PUMP, LOW);
+    group1Timer.stopTimer();
   }
 }
 void bt1PopCallback(void *ptr)
@@ -34,19 +49,6 @@ void bt1PopCallback(void *ptr)
     digitalWrite(STEAM, HIGH);
   } else {
     digitalWrite(STEAM, LOW);
-  }
-}
-void bt2PopCallback(void *ptr)
-{
-  uint32_t dual_state;
-  NexDSButton *btn = (NexDSButton *)ptr;
-  memset(buffer, 0, sizeof(buffer));
-  bt0.getValue(&dual_state);
-  if (dual_state) {
-    mode = mode + 1;
-    digitalWrite(STEAM, HIGH);
-  } else {
-
   }
 }
 
@@ -73,7 +75,6 @@ void boolToText (String) {
   }
 }
 
-
 void nextionUpdateStatus() {
   stats = digitalRead(STEAM);
   boolToText(stats);
@@ -93,5 +94,15 @@ void nextionUpdateStatus() {
   stats = getTemp();
   nextionSetText("t5", stats);
   stats = "";
+  timer = group1Timer.readTimer();
+  nextionSetText("t9", timer);
+}
+
+void nextionUpdateSettings() {
+  settings = getTargetTemp();
+  nextionSetText("t7", settings);
+  settings = PREINF_DELAY/1000;
+  nextionSetText("t8", settings);
+  settings = "";
 }
 
