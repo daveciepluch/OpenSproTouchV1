@@ -21,6 +21,10 @@ https://github.com/itead/ITEADLIB_Arduino_Nextion
 Blink Tutorial, in lamens terms for help with understanding delays without blocking:
 http://www.gammon.com.au/blink
 
+Code for the Shot Timer from LeoMil72:
+Utilizing his Sec Timer library for Arduino
+https://github.com/leomil72/secTimer
+
 Various others whose posts/code have helped me to better understand the Nextion interface
 
 ## Features
