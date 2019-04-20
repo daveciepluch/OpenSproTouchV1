@@ -38,5 +38,7 @@ Nextion HMI Display with controls and status screen
 ## Required Libraries
 
 Nextion -- https://github.com/itead/ITEADLIB_Arduino_Nextion
-Sensors -- built in
-SPI -- build in
+
+Sensors -- built in to the code
+
+SPI -- built in to Arduino
