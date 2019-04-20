@@ -1,5 +1,5 @@
 # OpenSproTouchV1
-Open Spro is the culmination of the hard work of many.  It is designed to work with the Arduino Uno R3, but can be easily adapted to other boards.  The display used is a generic 1.44" TFT Screen with the Adafruit GFX and ST7735 drivers.
+Open Spro is the culmination of the hard work of many.  It is designed to work with the Arduino Uno R3, but can be easily adapted to other boards.  The display used is a 3.2" Nextion Basic HMI Display.
 
 ## Code Contributors
 
