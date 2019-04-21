@@ -60,6 +60,8 @@ void loop() {
   updateSerialInterface(); //serial updates regardless of thermocouplestate
   nexLoop(nex_listen_list);
   preinfControl();
+  updateBrewControl();
+  updateSteamControl();
   updateAutofill(); //Updates the autofill circuit, ensuring the boiler is full
   while (getTemp() > 2) {
     if (millis() < lastPIDTime) {
