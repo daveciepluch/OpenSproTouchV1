@@ -46,3 +46,47 @@ Nextion -- https://github.com/itead/ITEADLIB_Arduino_Nextion
 Sensors -- built in to the code
 
 SPI -- built in to Arduino
+
+## Pinouts for Arduino Mega 2560
+
+### RELAYS
+
+Autofill 3
+
+Heat 6
+
+Brew 4
+
+Pump 5
+
+Steam 2
+
+### MAX31865
+
+CS 10
+
+DI 11
+
+DO 12
+
+CLK 13
+
+### DISPLAY
+
+TX 24
+
+RX 22
+
+### SENSORS
+
+Level 9
+
+### BUTTONS
+
+Brew Button A0
+
+Brew LED A1
+
+Steam Button A2
+
+Steam LED A3
