@@ -1,7 +1,7 @@
 # OpenSproTouchV1
 Open Spro is the culmination of the hard work of many.  It is designed to work with the Arduino Uno R3, but can be easily adapted to other boards.  The display used is a 3.2" Nextion Basic HMI Display.
 
-![alt text]()
+![alt text](BE3E5DCD-482F-4C2C-9E6F-6BC851CCE33F.JPG)
 
 ## Code Contributors
 
