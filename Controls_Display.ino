@@ -1,10 +1,27 @@
 /* This section controls the activation of the pump, brew valve, and steam valve
 */
 
+const uint32_t debounceTime = 5;  // 5 mSec, enough for most switches
+const bool switchOn  = false;     // using INPUT_PULLUP
+const bool switchOff = true;
+
+//for brew
+bool lastStateB   = switchOff;
+bool newStateB    = switchOff;
+bool toggleStateB = false;
+
+//for steam
+bool lastStateS   = switchOff;
+bool newStateS   = switchOff;
+bool toggleStateS = false;
+
+
 void setupControls() {
   pinMode(BREW, OUTPUT);
   pinMode(STEAM, OUTPUT);
   pinMode(PUMP, OUTPUT);
+  pinMode(BREWBUT, INPUT_PULLUP);
+  pinMode(STEAMBUT, INPUT_PULLUP);
   digitalWrite(BREW, LOW);
   digitalWrite(STEAM, LOW);
   digitalWrite(PUMP, LOW);
@@ -17,7 +34,7 @@ void preinfControl() {
       digitalWrite(PUMP, HIGH);
       brewState = 0;
     }
-    else{
+    else {
       brewState = 1;
     }
   }
@@ -101,8 +118,57 @@ void nextionUpdateStatus() {
 void nextionUpdateSettings() {
   settings = getTargetTemp();
   nextionSetText("t7", settings);
-  settings = PREINF_DELAY/1000;
+  settings = PREINF_DELAY / 1000;
   nextionSetText("t8", settings);
   settings = "";
+}
+
+void updateBrewControl()
+{
+  newStateB = digitalRead(BREWBUT);
+  if ( lastStateB != newStateB ) // state changed
+  {
+    delay( debounceTime );
+    lastStateB = newStateB;
+    // push on, push off
+    if ( newStateB == switchOn && toggleStateB == false )
+    {
+      toggleStateB = true;
+      digitalWrite(BREWLED, HIGH);
+      digitalWrite(BREW, HIGH );
+      preinfControl();
+    }
+    else if ( newStateB == switchOn && toggleStateB == true )
+    {
+      toggleStateB = false;
+      digitalWrite(PUMP, LOW );
+      digitalWrite(BREW, LOW );
+      digitalWrite(BREWLED, LOW);
+
+    }
+  }
+}
+
+void updateSteamControl()
+{
+  newStateS = digitalRead(STEAMBUT);
+  if ( lastStateS != newStateS ) // state changed
+  {
+    delay( debounceTime );
+    lastStateS = newStateS;
+    // push on, push off
+    if ( newStateS == switchOn && toggleStateS == false )
+    {
+      toggleStateS = true;
+      digitalWrite(STEAM, HIGH );
+      digitalWrite(STEAMLED, HIGH);
+    }
+    else if ( newStateS == switchOn && toggleStateS == true )
+    {
+      toggleStateS = false;
+      digitalWrite(STEAM, LOW );
+      digitalWrite(STEAMLED, LOW);
+    }
+  }
 }
 

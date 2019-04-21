@@ -19,6 +19,12 @@
 #define PUMP 5
 #define STEAM 2
 
+// Setup Button Pins
+const uint8_t BREWBUT = A0;
+#define BREWLED A1
+const uint8_t STEAMBUT = A2;
+#define STEAMLED A3
+
 // Delays + Intervals
 #define AUTOFILL_DELAY 500
 #define PID_UPDATE_INTERVAL 20
